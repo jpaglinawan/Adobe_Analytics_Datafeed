@@ -1,0 +1,14 @@
+/*CHANNEL CLASSIFICATION NEEDS ADDITIONAL PROCESS TO FOLLOW*/
+
+select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
+       post_evar5,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV
+from omni_production.rcentral
+where month = 10 AND
+      year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0
+group by omni_date,
+         post_evar5
+order by omni_date asc
+;

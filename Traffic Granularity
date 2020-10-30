@@ -1,0 +1,29 @@
+--Visits Calculation to be added
+
+/*PER MONTH*/
+
+select concat(cast(month as string),'/','1','/',cast(year as string)) as omni_date,
+       count(post_pagename) as Page_Views,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV
+from omni_production.rcentral
+where year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0
+group by omni_date,
+         month
+order by month asc
+;
+
+/*PER DAY*/
+select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
+       count(post_pagename) as Page_Views,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV
+from omni_production.rcentral
+where month = 10 AND
+      year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0
+group by omni_date,
+         day
+order by day asc
+;

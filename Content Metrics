@@ -1,1 +1,24 @@
-
+select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
+       post_evar55,
+       post_evar58,
+       post_evar32,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV,
+       count(post_pagename) as Page_Views,
+       count(evar58) as Downloads,
+       sum((case when post_event_list LIKE '"9%' THEN 1 ELSE 0 END)) as Watched_0,
+       sum((case when post_event_list LIKE '!2%' THEN 1 ELSE 0 END)) as Start,
+       sum((case when post_event_list LIKE '"6%' THEN 1 ELSE 0 END)) as Watched_25,
+       sum((case when post_event_list LIKE '"7%' THEN 1 ELSE 0 END)) as Watched_50,
+       sum((case when post_event_list LIKE '"8%' THEN 1 ELSE 0 END)) as Watched_75,
+       sum((case when post_event_list LIKE '!3%' THEN 1 ELSE 0 END)) as Finished
+from omni_production.rcentral
+where month = 10 AND
+      year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0
+group by omni_date,
+         post_evar55,
+         post_evar58,
+         post_evar32
+order by omni_date asc
+;

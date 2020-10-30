@@ -1,5 +1,18 @@
 --Visits Calculation to be added
 
+/*PER YEAR*/
+select cast(year as string) as omni_date,
+       count(post_pagename) as Page_Views,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV
+from omni_production.rcentral
+where hit_source = 1 AND
+      exclude_hit = 0
+group by omni_date,
+         year
+order by year asc
+;
+
+
 /*PER MONTH*/
 
 select concat(cast(month as string),'/','1','/',cast(year as string)) as omni_date,

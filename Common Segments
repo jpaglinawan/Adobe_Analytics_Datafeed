@@ -1,0 +1,86 @@
+--segment codes that can be added in your WHERE clause for filtering
+
+/*DEFAULT SEGMENT BY ADOBE ALWAYS INCLUDE*/
+where hit_source = 1 AND
+      exclude_hit = 0
+
+/*US CA Segment for GW Traffic w/o Blog*/
+--excludes Blog, Apps
+where (post_evar55 LIKE 'https://www.ringcentral.com/%' OR
+        post_evar55 LIKE 'https://www.ringcentral.ca%' OR
+        post_evar55 LIKE 'Snap%' OR
+        post_evar55 LIKE '%success.ringcentral.com%' OR
+        post_evar55 LIKE '%secure.ringcentral.com%' OR
+        post_evar55 LIKE 'Proactive-PopUp') AND 
+            (post_evar55 NOT LIKE '%/blog%' AND
+            post_evar55 NOT LIKE '%/apps%' AND
+            post_evar55 NOT LIKE '%ringcentral.com.%')
+
+/*US CA Segment for GW Traffic w/ Blog*/
+--usual requests now includes blogs
+where (post_evar55 LIKE 'https://www.ringcentral.com/%' OR
+        post_evar55 LIKE 'https://www.ringcentral.ca%' OR
+        post_evar55 LIKE 'Snap%' OR
+        post_evar55 LIKE '%success.ringcentral.com%' OR
+        post_evar55 LIKE '%secure.ringcentral.com%' OR
+        post_evar55 LIKE 'Proactive-PopUp') AND 
+            (post_evar55 NOT LIKE '%/apps%' AND
+            post_evar55 NOT LIKE '%ringcentral.com.%')
+
+/*Global Segment for GW Traffic w/o Blog*/
+where (post_evar55 LIKE '%www.ringcentral.fr/%' OR
+        post_evar55 LIKE '%www.ringcentral.ie/%' OR
+        post_evar55 LIKE '%www.ringcentral.nl/%' OR
+        post_evar55 LIKE '%www.ringcentral.sg/%' OR
+        post_evar55 LIKE '%www.ringcentral.com.au/%' OR
+        post_evar55 LIKE '%www.ringcentral.co.uk/%' OR
+        post_evar55 LIKE '%www.ringcentral.com/%' OR
+        post_evar55 LIKE '%www.ringcentral.ca/%' OR
+        post_evar55 LIKE 'Snap%' OR
+        post_evar55 LIKE '%success.ringcentral.com%' OR
+        post_evar55 LIKE '%secure.ringcentral.com%' OR
+        post_evar55 LIKE 'Proactive-PopUp') AND 
+            (post_evar55 NOT LIKE '%/blog%' AND
+            post_evar55 NOT LIKE '%/apps%')
+
+/*Global Segment for GW Traffic w/ Blog*/
+where (post_evar55 LIKE '%www.ringcentral.fr/%' OR
+        post_evar55 LIKE '%www.ringcentral.ie/%' OR
+        post_evar55 LIKE '%www.ringcentral.nl/%' OR
+        post_evar55 LIKE '%www.ringcentral.sg/%' OR
+        post_evar55 LIKE '%www.ringcentral.com.au/%' OR
+        post_evar55 LIKE '%www.ringcentral.co.uk/%' OR
+        post_evar55 LIKE '%www.ringcentral.com/%' OR
+        post_evar55 LIKE '%www.ringcentral.ca/%' OR
+        post_evar55 LIKE 'Snap%' OR
+        post_evar55 LIKE '%success.ringcentral.com%' OR
+        post_evar55 LIKE '%secure.ringcentral.com%' OR
+        post_evar55 LIKE 'Proactive-PopUp') AND 
+            (post_evar55 NOT LIKE '%/apps%')
+
+/*Global Segment for GW Traffic w/o Snapin*/
+--excludes snapin, proactive, blog and apps
+where (post_evar55 LIKE '%www.ringcentral.fr/%' OR
+        post_evar55 LIKE '%www.ringcentral.ie/%' OR
+        post_evar55 LIKE '%www.ringcentral.nl/%' OR
+        post_evar55 LIKE '%www.ringcentral.sg/%' OR
+        post_evar55 LIKE '%www.ringcentral.com.au/%' OR
+        post_evar55 LIKE '%www.ringcentral.co.uk/%' OR
+        post_evar55 LIKE '%www.ringcentral.com/%' OR
+        post_evar55 LIKE '%www.ringcentral.ca/%' OR
+        post_evar55 LIKE '%success.ringcentral.com%' OR
+        post_evar55 LIKE '%secure.ringcentral.com%') AND 
+            (post_evar55 NOT LIKE '%/apps%' AND
+            post_evar55 NOT LIKE 'Snap%' AND
+            post_evar55 NOT LIKE 'Proactive-PopUp' AND
+            post_evar55 NOT LIKE '%/blog%')
+
+/*Ecom Touch*/
+
+
+
+/*Lead Submit Participation*/
+
+
+
+/*Downloads Participation*/

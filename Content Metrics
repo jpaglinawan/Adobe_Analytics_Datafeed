@@ -1,3 +1,6 @@
+/*TIMESPENT METRICS TO FOLLOW, DEPENDENT ON VISIT_START_TIME FIX ON DATA_FEED*/
+/*PAGE DEPTH TO BE ADDED, GROUP PAGE DEPTH IN THE REPORT TO CAPTURE PAGE BUCKETS*/
+
 select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
        post_evar55,
        post_evar58,

@@ -84,3 +84,35 @@ where (post_evar55 LIKE '%www.ringcentral.fr/%' OR
 
 
 /*Downloads Participation*/
+
+
+
+/*Prospects only*/
+select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV_Prospects
+from omni_production.rcentral
+where month = 10 AND
+      year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0 AND
+      (post_evar11 = "true" OR post_evar11 IS NULL) <- prospects segment
+group by omni_date,
+         day
+order by day asc
+;
+
+/*Customers only*/
+select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
+       count(distinct concat(cast(post_visid_high as string),'-',cast(post_visid_low as string))) as UV_Customers
+from omni_production.rcentral
+where month = 10 AND
+      year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0 AND
+      post_evar11 != "true" <-customer segment
+group by omni_date,
+         day
+order by day asc
+;
+
+

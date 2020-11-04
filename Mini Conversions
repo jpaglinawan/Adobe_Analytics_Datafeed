@@ -1,0 +1,14 @@
+/*LEAD SUBMIT, CHAT AND DIALOG TECH*/
+select concat(cast(month as string),'/',cast(day as string),'/',cast(year as string)) as omni_date,
+       sum((case when post_event_list LIKE '206%' THEN 1 ELSE 0 END)) as Leads_submit,
+       sum((case when post_event_list LIKE '%249%' THEN 1 ELSE 0 END)) as Chat_leads,
+       sum((case when post_event_list LIKE '%279%' THEN 1 ELSE 0 END)) as Dialogtech
+from omni_production.rcentral
+where month = 10 AND
+      year = 2020 AND
+      hit_source = 1 AND
+      exclude_hit = 0
+group by omni_date,
+         day
+order by day asc
+;
